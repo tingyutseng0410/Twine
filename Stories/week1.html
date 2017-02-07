@@ -1,0 +1,106 @@
+<tw-storydata name="week1" startnode="2" creator="Twine" creator-version="2.0.11" ifid="AFB1F190-2F1C-464C-9BC0-1189C2EF9E9C" format="SugarCube 2 (local/offline)" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
+
+
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
+</script><tw-passagedata pid="1" name="StoryInit" tags="" position="209,137">&lt;&lt;set $brushedTeeth to false&gt;&gt;
+
+&lt;&lt;set $day to 1&gt;&gt;
+&lt;&lt;set $actionsLeft to 3&gt;&gt;
+&lt;&lt;set $fatigue to 0&gt;&gt;
+&lt;&lt;set $funLevel to 0&gt;&gt;
+&lt;&lt;set $tennis to 0&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="2" name="My Room" tags="" position="214,292">It&#39;s day $day.
+
+&lt;&lt;nobr&gt;&gt;
+
+&lt;&lt;if $fatigue &gt;= 10&gt;&gt; 
+You are really tired.
+&lt;&lt;/if&gt;&gt;
+
+
+&lt;&lt;if $day is 1&gt;&gt;
+It&#39;s sunny.
+&lt;&lt;elseif $day is 2&gt;&gt;
+It&#39;s raining.
+&lt;&lt;elseif $day is 4&gt;&gt;
+	&lt;&lt;goto &quot;Ending&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;
+I have to pay my bills.
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;/nobr&gt;&gt;
+
+/* Create a span HTML element with a link, that when clicked, replaces itself (see replace explanation) */
+
+&lt;span id=&quot;toast&quot;&gt;
+  &lt;&lt;link &quot;Eat Toast&quot;&gt;&gt;
+	&lt;&lt;replace &quot;#toast&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+  &lt;&lt;/link&gt;&gt;
+&lt;/span&gt;
+
+
+You have $actionsLeft energy left.
+
+&lt;&lt;if $actionsLeft &gt; 0&gt;&gt;
+	&lt;&lt;link &quot;Pay your bills&quot;&gt;&gt;
+		&lt;&lt;set $actionsLeft to $actionsLeft - 1&gt;&gt;
+		&lt;&lt;set $tennis to $tennis + 1.67&gt;&gt;
+		&lt;&lt;goto &quot;My Bills&quot;&gt;&gt;
+	&lt;&lt;/link&gt;&gt;
+	
+	&lt;&lt;if $brushedTeeth is false&gt;&gt;
+	  &lt;&lt;link &quot;Brush your teeth&quot;&gt;&gt;
+		  &lt;&lt;set $fatigue to $fatigue + 5&gt;&gt;
+		  &lt;&lt;set $actionsLeft to $actionsLeft - 1&gt;&gt;
+		  &lt;&lt;set $funLevel to $funLevel - 1000&gt;&gt;
+		  &lt;&lt;set $brushedTeeth to true&gt;&gt;
+		  &lt;&lt;goto &quot;My Room&quot;&gt;&gt;
+	  &lt;&lt;/link&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+	
+	&lt;&lt;if $brushedTeeth is true&gt;&gt;
+	  &lt;&lt;link &quot;Skillfully brush your teeth&quot;&gt;&gt;
+		  &lt;&lt;set $fatigue to $fatigue + 2&gt;&gt;
+		  &lt;&lt;set $actionsLeft to $actionsLeft - 1&gt;&gt;
+		  &lt;&lt;set $funLevel to $funLevel + 50&gt;&gt;
+		  &lt;&lt;goto &quot;My Room&quot;&gt;&gt;
+	  &lt;&lt;/link&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;else&gt;&gt;
+  /* Run this code whenever player clicks &quot;Sleep&quot; */
+  &lt;&lt;link &quot;Sleep&quot;&gt;&gt;
+	&lt;&lt;set $day to $day + 1&gt;&gt;
+	&lt;&lt;set $actionsLeft to 3&gt;&gt;
+	&lt;&lt;set $fatigue to 0&gt;&gt;
+	&lt;&lt;goto &quot;My Room&quot;&gt;&gt;
+  &lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+/* My Stats! */
+
+&lt;&lt;display &quot;Stats&quot;&gt;&gt;
+
+</tw-passagedata>
+<tw-passagedata pid="3" name="My Bills" tags="" position="407,288">You paid your bills. Good work
+
+[[Do something else|My Room]]</tw-passagedata>
+<tw-passagedata pid="4" name="My House" tags="" position="551,120">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="5" name="Ending" tags="" position="549,293">IT&#39;s the end
+
+
+$atk
+$def
+
+$hp
+
+
+$hp to $hp + ($def - $atk)
+
+</tw-passagedata>
+<tw-passagedata pid="6" name="Stats" tags="" position="366,131">~My Stats~
+
+Tennis: $tennis
+Fun Level: $funLevel</tw-passagedata>
+</tw-storydata>
